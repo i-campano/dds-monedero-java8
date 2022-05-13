@@ -22,12 +22,6 @@ public class Cuenta {
     saldo = montoInicial;
   }
 
-  //Porque quiero poder setear los movimientos? Tengo un metodo publico ya que permite agregar un
-  // movimiento a la lista
-  public void setMovimientos(List<Movimiento> movimientos) {
-    this.movimientos = movimientos;
-  }
-
   // long method. Varias responsabilidades
   // primitive obsession
   public void poner(double cuanto) {
