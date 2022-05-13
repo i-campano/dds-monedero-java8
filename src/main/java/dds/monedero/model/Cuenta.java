@@ -62,7 +62,7 @@ public class Cuenta {
   }
 
   //long parameters list
-  public void agregarMovimiento(Movimiento movimiento) {
+  private void agregarMovimiento(Movimiento movimiento) {
     movimientos.add(movimiento);
   }
 
@@ -80,11 +80,7 @@ public class Cuenta {
   public double getSaldo() {
     return saldo;
   }
+,
 
-  //No queremos poder setear un saldo, solo los depositos o extracciones deberian poder modificar
-  // el valor del saldo
-  public void setSaldo(double saldo) {
-    this.saldo = saldo;
-  }
-
+  ,
 }
