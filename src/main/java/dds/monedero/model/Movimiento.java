@@ -44,11 +44,6 @@ public class Movimiento {
     return !esDeposito;
   }
 
-  //responsabilidad de la cuenta la de agregar un movimiento
-  public void agregateA(Cuenta cuenta) {
-    cuenta.setSaldo(calcularValor(cuenta));
-    cuenta.agregarMovimiento(fecha, monto, esDeposito);
-  }
 
   // responsabilidad de la cuenta controlar el saldo
   public double calcularValor(Cuenta cuenta) {
