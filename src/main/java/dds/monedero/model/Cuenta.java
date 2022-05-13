@@ -72,7 +72,6 @@ public class Cuenta {
     }
   }
 
-  //long parameters list
   private void agregarMovimiento(Movimiento movimiento) {
     movimientos.add(movimiento);
   }
