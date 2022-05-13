@@ -25,23 +25,29 @@ public class Cuenta {
   // long method. Varias responsabilidades
   // primitive obsession
   public void poner(double cuanto) {
-    if (cuanto <= 0) {
-      throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
-    }
+    validarMontoDeposito(cuanto);
 
-    //extraer la validación
-    if (getMovimientos().stream().filter(movimiento -> movimiento.isDeposito()).count() >= 3) {
-      throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
-    }
+    validarCantidadMaximaDepositosEnElDia();
 
     this.agregarMovimiento(new Movimiento(LocalDate.now(), cuanto, true));
   }
 
-  //Long method
-  public void sacar(double cuanto) {
+  private void validarMontoDeposito(double cuanto) {
     if (cuanto <= 0) {
       throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
     }
+  }
+
+  private void validarCantidadMaximaDepositosEnElDia() {
+    if (getMovimientos().stream().filter(movimiento -> movimiento.isDeposito()).count() >= 3) {
+      throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
+    }
+  }
+
+  //Long method
+  public void sacar(double cuanto) {
+    validarMontoDeposito(cuanto);
+
     if (getSaldo() - cuanto < 0) {
       throw new SaldoMenorException("No puede sacar mas de " + getSaldo() + " $");
     }
@@ -74,7 +80,5 @@ public class Cuenta {
   public double getSaldo() {
     return saldo;
   }
-,
 
-  ,
 }
