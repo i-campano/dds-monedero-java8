@@ -22,22 +22,30 @@ public class Cuenta {
     saldo = montoInicial;
   }
 
+  //Porque quiero poder setear los movimientos? Tengo un metodo publico ya que permite agregar un
+  // movimiento a la lista
   public void setMovimientos(List<Movimiento> movimientos) {
     this.movimientos = movimientos;
   }
 
+  // long method. Varias responsabilidades
+  // primitive obsession
   public void poner(double cuanto) {
     if (cuanto <= 0) {
       throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
     }
 
+    //extraer la validación
     if (getMovimientos().stream().filter(movimiento -> movimiento.isDeposito()).count() >= 3) {
       throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
     }
 
+    //Se podría utilizar 'agregarMovimiento', en lugar de darle la responsabilidad a Movimiento de
+    // que se agregue a una Cuenta
     new Movimiento(LocalDate.now(), cuanto, true).agregateA(this);
   }
 
+  //Long method
   public void sacar(double cuanto) {
     if (cuanto <= 0) {
       throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
@@ -74,6 +82,8 @@ public class Cuenta {
     return saldo;
   }
 
+  //No queremos poder setear un saldo, solo los depositos o extracciones deberian poder modificar
+  // el valor del saldo
   public void setSaldo(double saldo) {
     this.saldo = saldo;
   }
